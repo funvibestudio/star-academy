@@ -186,11 +186,30 @@
     </style>
 
     <script>
-        // Date et heure du prochain prime (samedi à 21h)
-        const nextPrimeDate = new Date("2024-10-19T21:00:00").getTime();
+        function getNextPrimeDate() {
+            const now = new Date();
+            const dayOfWeek = now.getDay(); // 0 = Dimanche, 6 = Samedi
+            const hours = now.getHours();
+
+            let nextPrimeDate = new Date();
+
+            // Si aujourd'hui est samedi et il est 21h ou plus, on passe à la semaine suivante
+            if (dayOfWeek === 6 && hours >= 21) {
+                nextPrimeDate.setDate(nextPrimeDate.getDate() + 7);
+            } else {
+                // Calculer le prochain samedi
+                const daysUntilSaturday = (6 - dayOfWeek + 7) % 7;
+                nextPrimeDate.setDate(nextPrimeDate.getDate() + daysUntilSaturday);
+            }
+
+            // Fixer l'heure du prochain prime à 21h
+            nextPrimeDate.setHours(21, 0, 0, 0);
+            return nextPrimeDate;
+        }
 
         function updateCountdown() {
             const now = new Date().getTime();
+            const nextPrimeDate = getNextPrimeDate().getTime();
             const distance = nextPrimeDate - now;
 
             // Calcul du temps restant
@@ -220,10 +239,9 @@
         <nav>
             <ul>
                 <li><a href="#home">Accueil</a></li>
-                  <li><a href="#actu">Actualités</a></li>
+                <li><a href="#actu">Actualités</a></li>
                 <li><a href="#candidats">Candidats</a></li>
                 <li><a href="#performances">Performances</a></li>
-              
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </nav>
@@ -239,11 +257,9 @@
             <h3>Prochain Prime dans :</h3>
             <p id="countdown-timer"></p>
         </div>
-
-        
     </section>
 
-     <!-- Section Actualités -->
+    <!-- Section Actualités -->
     <section id="actu">
         <h2>Dernières actualités</h2>
         <article>
@@ -252,7 +268,7 @@
         </article>
         <article>
             <h3>Actualité 2</h3>
-            <p>    </p>
+            <p></p>
         </article>
     </section>
 
@@ -262,28 +278,14 @@
         <div class="candidat">
             <img src="candidat1.jpg" alt="Candidat 1">
             <h3>Candidat 1</h3>
-            <p>Un talent brut, prêt à briller sur scène.</p>
+            <p>Description du candidat 1.</p>
         </div>
         <div class="candidat">
             <img src="candidat2.jpg" alt="Candidat 2">
             <h3>Candidat 2</h3>
-            <p>Une voix unique, pleine d'émotion.</p>
+            <p>Description du candidat 2.</p>
         </div>
     </section>
-
-    <!-- Section Performances -->
-    <section id="performances">
-        <h2>Les Primes</h2>
-        <div class="performance">
-            <h3>Performance 1</h3>
-            <video width="400" controls>
-                <source src="performance1.mp4" type="video/mp4">
-                Votre navigateur ne supporte pas la vidéo.
-            </video>
-        </div>
-    </section>
-
-   
 
     <!-- Formulaire de contact -->
     <section id="contact">
@@ -298,7 +300,8 @@
 
     <!-- Pied de page -->
     <footer>
-        <p>Ce site est indépendant et n'a aucun lien officiel avec la Star Academy et ses partenaires</p>
+        <p>&copy; 2024 Star Ac - Tous droits réservés.</p>
+        <p><strong>Disclaimer:</strong> Ce site n'est pas affilié à la Star Academy, à la production ou à toute autre organisation officielle. Il s'agit d'un site de fans à but non commercial.</p>
     </footer>
 </body>
 </html>
