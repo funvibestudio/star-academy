@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Star Ac</title>
+    <style>
+        /* Style général */
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        /* En-tête et navigation */
+        header {
+            background: linear-gradient(90deg, #1e90ff, #ffd700);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin: 0 10px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            transition: color 0.3s;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+
+        /* Sections */
+        section {
+            padding: 20px;
+            text-align: center;
+        }
+
+        h2 {
+            color: #ffd700;
+            text-transform: uppercase;
+            font-size: 2em;
+            letter-spacing: 2px;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #ffffff;
+        }
+
+        /* Vidéo */
+        .video {
+            margin-top: 20px;
+        }
+
+        .video video {
+            border: 5px solid #ffd700;
+            box-shadow: 0 0 15px #ffd700;
+        }
+
+        /* Candidats */
+        .candidat {
+            display: inline-block;
+            margin: 20px;
+            text-align: center;
+        }
+
+        .candidat img {
+            max-width: 200px;
+            border-radius: 50%;
+            border: 3px solid #ffd700;
+            box-shadow: 0 0 10px #ffd700;
+        }
+
+        .candidat h3 {
+            color: #1e90ff;
+            text-transform: uppercase;
+            margin-top: 10px;
+        }
+
+        .candidat p {
+            color: #ffffff;
+        }
+
+        /* Performances */
+        .performance {
+            margin: 20px;
+        }
+
+        .performance video {
+            width: 80%;
+            max-width: 600px;
+            border: 5px solid #1e90ff;
+            box-shadow: 0 0 15px #1e90ff;
+        }
+
+        /* Compte à rebours */
+        #countdown {
+            text-align: center;
+            margin: 20px auto;
+            background-color: #1e1e1e;
+            padding: 15px;
+            border-radius: 10px;
+            width: fit-content;
+            box-shadow: 0 0 10px #ffd700;
+        }
+
+        #countdown h3 {
+            color: #ffd700;
+        }
+
+        #countdown-timer {
+            font-size: 24px;
+            color: #1e90ff;
+            font-weight: bold;
+        }
+
+        /* Actualités */
+        #actu article {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #1e90ff;
+            padding-bottom: 15px;
+        }
+
+        #actu h3 {
+            color: #1e90ff;
+        }
+
+        /* Formulaire de contact */
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            background-color: #1e1e1e;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px #1e90ff;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #000;
+            color: #fff;
+        }
+
+        form button {
+            padding: 10px 15px;
+            background-color: #1e90ff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        form button:hover {
+            background-color: #ffd700;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 40px;
+        }
+    </style>
+
+    <script>
+        // Date et heure du prochain prime (samedi à 21h)
+        const nextPrimeDate = new Date("2024-10-19T21:00:00").getTime();
+
+        function updateCountdown() {
+            const now = new Date().getTime();
+            const distance = nextPrimeDate - now;
+
+            // Calcul du temps restant
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Affichage du compte à rebours
+            document.getElementById("countdown-timer").innerHTML = `${days}j ${hours}h ${minutes}m ${seconds}s`;
+
+            // Quand le compte à rebours est terminé
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById("countdown-timer").innerHTML = "Le prime est en direct !";
+            }
+        }
+
+        // Mettre à jour le compte à rebours chaque seconde
+        const countdownInterval = setInterval(updateCountdown, 1000);
+    </script>
+</head>
+<body>
+    <!-- En-tête du site -->
+    <header>
+        <h1>Star Ac - Suivez vos talents préférés</h1>
+        <nav>
+            <ul>
+                <li><a href="#home">Accueil</a></li>
+                <li><a href="#candidats">Candidats</a></li>
+                <li><a href="#performances">Performances</a></li>
+                <li><a href="#actu">Actualités</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Section Accueil -->
+    <section id="home">
+        <h2>Bienvenue à la Star Ac</h2>
+        <p>Découvrez les nouveaux talents et suivez les performances chaque semaine.</p>
+
+        <!-- Compte à rebours pour le prochain prime -->
+        <div id="countdown">
+            <h3>Prochain Prime dans :</h3>
+            <p id="countdown-timer"></p>
+        </div>
+
+        <div class="video">
+            <h3>Bande-annonce</h3>
+            <video width="600" controls>
+                <source src="promo.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+            </video>
+        </div>
+    </section>
+
+    <!-- Section Candidats -->
+    <section id="candidats">
+        <h2>Les Candidats</h2>
+        <div class="candidat">
+            <img src="candidat1.jpg" alt="Candidat 1">
+            <h3>Candidat 1</h3>
+            <p>Un talent brut, prêt à briller sur scène.</p>
+        </div>
+        <div class="candidat">
+            <img src="candidat2.jpg" alt="Candidat 2">
+            <h3>Candidat 2</h3>
+            <p>Une voix unique, pleine d'émotion.</p>
+        </div>
+    </section>
+
+    <!-- Section Performances -->
+    <section id="performances">
+        <h2>Les Performances</h2>
+        <div class="performance">
+            <h3>Performance 1</h3>
+            <video width="400" controls>
+                <source src="performance1.mp4" type="video/mp4">
+                Votre navigateur ne supporte pas la vidéo.
+            </video>
+        </div>
+    </section>
+
+    <!-- Section Actualités -->
+    <section id="actu">
+        <h2>Dernières actualités</h2>
+        <article>
+            <h3>Actualité 1</h3>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus lacinia odio vitae vestibulum vestibulum.</p>
+        </article>
+        <article>
+            <h3>Actualité 2</h3>
+            <p>Proin sit amet nibh faucibus, volutpat orci et, facilisis lectus.</p>
+        </article>
+    </section>
+
+    <!-- Formulaire de contact -->
+    <section id="contact">
+        <h2>Contactez-nous</h2>
+        <form action="">
+            <input type="text" placeholder="Votre nom">
+            <input type="email" placeholder="Votre email">
+            <textarea placeholder="Votre message"></textarea>
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+
+    <!-- Pied de page -->
+    <footer>
+        <p>&copy; 2024 Star Ac - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
